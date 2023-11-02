@@ -15,6 +15,7 @@ import com.example.vending.machine.service.CoinBalanceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+
 @Tag(name = "Coins", description = "Coins APIs")
 @RequiredArgsConstructor
 @RestController

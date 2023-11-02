@@ -11,18 +11,16 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.vending.machine.dto.ProductDto;
 import com.example.vending.machine.entity.ProductEntity;
 import com.example.vending.machine.repository.CoinBalanceDao;
 import com.example.vending.machine.repository.ProductDao;
-/**
- * Unit tests for {@link VendingMachineService}.
- *
- * @author td.
- * @version 0.1.0
- */
+
+
 @RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
 public class VendingMachineServiceTest {
 	
 	@InjectMocks

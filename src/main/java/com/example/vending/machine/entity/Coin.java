@@ -1,7 +1,5 @@
 package com.example.vending.machine.entity;
 
-import java.math.BigDecimal;
-
 public enum Coin {
 	TEN_COINS("10st",0.1),
 	TWENTY_COINS("20st", 0.2),
