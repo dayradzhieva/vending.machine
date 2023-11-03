@@ -2,7 +2,8 @@ package com.example.vending.machine.controller;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,20 +17,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.example.vending.machine.dto.ProductDto;
+import com.example.vending.machine.entity.Coin;
 import com.example.vending.machine.service.CoinBalanceService;
-import com.example.vending.machine.service.VendingMachineService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(MockitoJUnitRunner.class)
-public class VendingMachineControllerTest {
+public class CoinBalanceControllerTest {
 	
-	private static final ObjectMapper MAPPER = new ObjectMapper();
 	@InjectMocks
-	private VendingMachineController controller;
-	
-	@Mock
-	private VendingMachineService vendingMachineService;
+	private CoinBalanceController controller;
 	
 	@Mock
 	private CoinBalanceService coinBalanceService;
@@ -44,19 +39,25 @@ public class VendingMachineControllerTest {
 	}
 	
 	@Test
-	public void testBuyProduct() throws Exception {
-		ProductDto product = new ProductDto();
-		product.setName("Chips");
-		product.setQuantity(5);
-		product.setPrice(1.2);
-		when(this.vendingMachineService.buyProduct(product.getName())).thenReturn(product);
+	public void testInsertCoin() throws Exception {
 		
-		this.mockMvc.perform(post("/vending-machine/" + product.getName() + "/buy"))
+		when(this.coinBalanceService.getBalance()).thenReturn(0.5);
+		
+		this.mockMvc.perform(put("/vending-machine/coins/" + Coin.FIFTY_COINS))
 		.andDo(print())
 		.andExpect(status().isOk())
-		.andExpect(content().json(MAPPER.writeValueAsString(product)));
+		.andExpect(content().string("0.5"));
 		
-		verify(this.vendingMachineService).buyProduct(product.getName());
+		verify(this.coinBalanceService).getBalance();
 	}
-
+	
+	@Test
+	public void testReturnInsertedCoins() throws Exception {
+		
+		this.mockMvc.perform(delete("/vending-machine/coins/"))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().json("[]"));
+	}
+	
 }

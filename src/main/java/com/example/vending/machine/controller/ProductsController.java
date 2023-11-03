@@ -21,30 +21,26 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Products", description = "Products APIs")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(ProductsController.MAPPING)
+@RequestMapping("/vending-machine/products")
 public class ProductsController {
 	
-	static final String MAPPING = "/vending-machine/products";
-	
 	private final ProductsService service;
+	
 	@Operation(summary = "Create a product")
 	@PostMapping
 	public ProductDto createProduct(@RequestBody ProductDto dto) {
-		
 		return this.service.createProduct(dto);
 	}
 	
 	@Operation(summary = "List all products")
 	@GetMapping("/list")
 	public List<ProductDto> list() {
-		
 		return this.service.listAllProducts();
 	}
 	
 	@Operation(summary = "Update a product")
 	@PutMapping("/{productName}")
 	public ProductDto updateProduct(@PathVariable(name = "productName") String productName, @RequestBody ProductDto dto) {
-		
 		return this.service.updateProduct(productName, dto);
 	}
 	

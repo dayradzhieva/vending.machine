@@ -1,5 +1,6 @@
 package com.example.vending.machine.service;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
@@ -32,7 +33,7 @@ public class ProductServiceTest {
 	private ProductDao productDao;
 	
 	@Test
-	public void testCreateProduct(){
+	public void testCreateProduct() {
 		ProductDto product = new ProductDto();
 		product.setName("Chips");
 		product.setPrice(1.2);
@@ -49,7 +50,7 @@ public class ProductServiceTest {
 	}
 	
 	@Test
-	public void testListAllProducts(){
+	public void testListAllProducts() {
 		ProductDto product = new ProductDto();
 		product.setName("Chips");
 		product.setPrice(1.2);
@@ -66,7 +67,7 @@ public class ProductServiceTest {
 	}
 	
 	@Test
-	public void testUpdateProduct(){
+	public void testUpdateProduct() {
 		ProductDto product = new ProductDto();
 		product.setName("Chips");
 		product.setPrice(1.2);
@@ -86,8 +87,32 @@ public class ProductServiceTest {
 	}
 	
 	@Test
-	public void testDeleteProduct(){
-		
+	public void testDeleteProduct() {
 		this.service.deleteProduct("Chips");
 	}
+	
+	@Test
+	public void testCreateProductWithNegativePrice() {
+		ProductDto product = new ProductDto();
+		product.setName("Chips");
+		product.setPrice(-1.2);
+		product.setQuantity(5);
+		
+		assertThatExceptionOfType(IllegalArgumentException.class)
+		.isThrownBy(() -> this.service.createProduct(product))
+		.withMessage(String.format("The price of product [%s] should be positive number", product.getName()));
+	}
+	
+	@Test
+	public void testUpdateProductThatNotExists() {
+		ProductDto product = new ProductDto();
+		product.setName("Chips");
+		product.setPrice(1.2);
+		product.setQuantity(5);
+		
+		assertThatExceptionOfType(IllegalArgumentException.class)
+		.isThrownBy(() -> this.service.updateProduct(product.getName(), product))
+		.withMessage(String.format("Product with name [%s] is not found", product.getName()));
+	}
+	
 }

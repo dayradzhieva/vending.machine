@@ -1,4 +1,4 @@
-package com.example.vending.machine.exception.hendler;
+package com.example.vending.machine.exception.hаndler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

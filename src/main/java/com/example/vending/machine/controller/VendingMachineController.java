@@ -14,15 +14,14 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Vending Machine", description = "Vending Machine APIs")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(VendingMachineController.MAPPING)
+@RequestMapping("/vending-machine")
 public class VendingMachineController {
-	public static final String MAPPING = "/vending-machine";
 	
 	private final VendingMachineService service;
+	
 	@Operation(summary = "Buy a product")
 	@PostMapping (value = "/{productName}/buy")
 	ProductDto buyProduct(@PathVariable String productName) {
-		
 		return this.service.buyProduct(productName);
 	}
 	
