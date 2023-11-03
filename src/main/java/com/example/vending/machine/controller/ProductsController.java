@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(ProductsController.MAPPING)
 public class ProductsController {
 	
-	static final String MAPPING = "/products";
+	static final String MAPPING = "/vending-machine/products";
 	
 	private final ProductsService service;
 	@Operation(summary = "Create a product")

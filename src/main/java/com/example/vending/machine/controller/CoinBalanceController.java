@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Coins", description = "Coins APIs")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping( "/coins")
+@RequestMapping( "/vending-machine/coins")
 public class CoinBalanceController {
 	
 	private final CoinBalanceService service;

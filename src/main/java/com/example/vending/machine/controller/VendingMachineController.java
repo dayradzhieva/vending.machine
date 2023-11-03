@@ -20,7 +20,7 @@ public class VendingMachineController {
 	
 	private final VendingMachineService service;
 	@Operation(summary = "Buy a product")
-	@PostMapping (value = "/products/{productName}/buy")
+	@PostMapping (value = "/{productName}/buy")
 	ProductDto buyProduct(@PathVariable String productName) {
 		
 		return this.service.buyProduct(productName);
