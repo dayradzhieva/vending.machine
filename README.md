@@ -57,7 +57,7 @@ The API provides the following endpoints:
 - GET /vending-machine/products/list: Get all available products.
 - PUT /vending-machine/coins/{coin}: Insert a coin.
 - DELETE /vending-machine/coins/: Return all inserted coins.
-- POST /vending-machine/{productName}/buy: Buy a product.
+- POST /vending-machine/buy/{productName}: Buy a product.
 
 ### Examples
 Here are some example requests and responses for the API:

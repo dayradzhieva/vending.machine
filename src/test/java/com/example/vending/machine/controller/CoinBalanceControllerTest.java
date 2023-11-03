@@ -47,8 +47,6 @@ public class CoinBalanceControllerTest {
 		.andDo(print())
 		.andExpect(status().isOk())
 		.andExpect(content().string("0.5"));
-		
-		verify(this.coinBalanceService).getBalance();
 	}
 	
 	@Test

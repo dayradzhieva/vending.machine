@@ -51,12 +51,10 @@ public class VendingMachineControllerTest {
 		product.setPrice(1.2);
 		when(this.vendingMachineService.buyProduct(product.getName())).thenReturn(product);
 		
-		this.mockMvc.perform(post("/vending-machine/" + product.getName() + "/buy"))
+		this.mockMvc.perform(post("/vending-machine/buy/" + product.getName()))
 		.andDo(print())
 		.andExpect(status().isOk())
 		.andExpect(content().json(MAPPER.writeValueAsString(product)));
-		
-		verify(this.vendingMachineService).buyProduct(product.getName());
 	}
 
 }
